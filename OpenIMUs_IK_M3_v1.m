@@ -1,0 +1,215 @@
+%%  CREATE IK .MOT
+
+%% IMU Inverse Kinematics - CALIBRATION TRIALS
+clc
+for j = 4:6
+% IMU registration
+close all;
+OutPath = pwd;
+if s<10
+    modelFileName_IK = [ OutPath,'\S0', num2str(s),'_allMarkers_allIMU_CoordEst_calibrated.osim'];
+else
+    modelFileName_IK = [ OutPath,'\S', num2str(s),'_allMarkers_allIMU_CoordEst_calibrated.osim'];
+end
+visualizeTracking = false;
+orientationsFileName_IK = [filename '_orientations_trial.sto'];
+startTime = 0;
+endTime = 100;
+resultsDirectory = 'IKResults';
+IK_xml = 'myIMUIK_Setup.xml';
+OpenSense_folder = OutPath;
+
+OpenSense_OrientationTracking_fx(modelFileName_IK, orientationsFileName_IK, ...
+    startTime, endTime, resultsDirectory, visualizeTracking, IK_xml, OpenSense_folder)
+end
+beep;
+
+%% IMU Inverse Kinematics - RANDOM MOVEMENTS WITH NO ALIGNMENTS
+clc;
+tic
+OutPath = pwd;
+if s<10
+    modelFileName_IK = [ OutPath,'\S0', num2str(s),'_allMarkers_allIMU_CoordEst_calibrated.osim'];
+else
+    modelFileName_IK = [ OutPath,'\S', num2str(s),'_allMarkers_allIMU_CoordEst_calibrated.osim'];
+end
+for j = 1:23
+visualizeTracking = false;
+if j<10
+    filename = ['Session1_00', num2str(j)];
+else
+    filename = ['Session1_0', num2str(j)];
+end
+% IMU registration
+OutPath = pwd;
+orientationsFileName_IK = [filename '_orientations.sto'];
+startTime = 0;
+endTime = 100;
+resultsDirectory = 'IKResults';
+IK_xml = 'myIMUIK_Setup.xml';
+OpenSense_folder = OutPath;
+
+OpenSense_OrientationTracking_fx(modelFileName_IK, orientationsFileName_IK, ...
+    startTime, endTime, resultsDirectory, visualizeTracking, IK_xml, OpenSense_folder)
+end
+toc
+beep;
+%% IK Other movemntes (Running/Stairs)
+% tic
+% for j = 7:12
+%     
+%     DSt = getfield(DS, ['d', num2str(j)]);
+% 
+% % IMU registration
+% close all;
+% OutPath = pwd;
+% if j<10
+%     filename = ['IMU_00', num2str(j), '_P', num2str(p)];
+% else
+%     filename = ['IMU_0', num2str(j), '_P', num2str(p)];
+% end
+% fr = fs;
+% % Headers = {'torso_imu','pelvis_imu', 'femur_r_imu','tibia_r_imu','toes_r_imu','femur_l_imu','tibia_l_imu','toes_l_imu'};
+% Headers = {'torso_imu','pelvis_imu','humerus_r_imu','radius_r_imu','humerus_l_imu','radius_l_imu', 'femur_r_imu','tibia_r_imu','calcn_r_imu','femur_l_imu','tibia_l_imu','calcn_l_imu'};
+% nbodies =  length(Headers);
+% fr_cal = 10;
+% fr_mov = 1:length(DSt.time);
+% nfr = size(DSt.time, 1);
+% 
+% baseIMUName = 'pelvis_imu';Placer_xml = [OutPath, '\myIMUPlacer_Setup.xml'];
+% % modelFileName = [ OutPath, '\S05_allMarkers_allIMU.osim'];
+% modelFileName = [ OutPath, '\S0', num2str(s),'_allMarkers_allIMU_CoordEst.osim'];
+% % modelFileName_IK = [ OutPath,'\S01_allMarkers_allIMU_calibrated.osim'];
+% modelFileName_IK = [ OutPath,'\S0', num2str(s),'_allMarkers_allIMU_CoordEst_calibrated.osim'];
+% visualizeTracking = false;
+% calibrate = false;
+% % calibrate = true;
+% 
+% %% PCA --- Axis Heading Correction - Offset model------------------------------------------------------------------------------------------------------
+% % run humerus_left_alignment_12.m
+% % run humerus_right_alignment_12.m
+% % run radius_left_alignment_12.m
+% % run radius_right_alignment_12.m
+% run Pelvis_alignment_15_notrunk_rot.m
+% % run Femur_right_alignment_15.m
+% % run tibia_r_alignment_15.m
+% % run toes_r_alignment_15.m
+% % run Femur_left_alignment_15.m
+% % run tibia_l_alignment_15.m
+% % run toes_l_alignment_15.m
+% % run Torso_alignment_15_notrunk_rot.m
+% 
+% close all
+% disp(' ')
+% disp('------------ PCA completed -----------')
+% 
+% 
+% % PCA Xsens-----------------------------------------------------------------------------------------------------------------------------------------------------------
+% all_same = "true";% rotation among Z of different angle based on PCA + sit-to-stand/walking
+% 
+% %init
+% angleLT = 0;
+% angleRT = 0;
+% angleLC = 0;
+% angleRC = 0;
+% 
+% % run IMU_Placer_2_IMUv3
+% run OpenIMUs_Placer_v8.m
+% 
+% %% FAVRE --- IMU WITH MAG
+% close all
+% clc
+% % % visualization = "true";
+% visualization = "false";
+% % 
+% % init
+% DSt.tibia_l.Q_rot = DSt.tibia_l.Q_GS;
+% DSt.tibia_r.Q_rot = DSt.tibia_r.Q_GS;
+% DSt.calcn_l.Q_rot = DSt.calcn_l.Q_GS;
+% DSt.calcn_r.Q_rot = DSt.calcn_r.Q_GS;
+% 
+% % -------------------  CALCUALTE THE ANGLE OF EXTRA ROTATION BASED ON FAVRE
+% %LEFT TIBIA
+% disp('--------------------- tibia_l ---------------------')
+% [angleLT, DSt.femur_l.Q_rot, DSt.tibia_l.Q_rot] = ...
+%     OpenIMUs_AngAlign_v3(DSt.adduction_range_l, DSt.femur_l.g_SS, DSt.tibia_l.g_SS, ...
+%     DSt.femur_l.R_GS, DSt.tibia_l.R_GS, fs, visualization);
+% %RIGHT TIBIA
+% disp('--------------------- tibia_r ---------------------')
+% [angleRT, DSt.femur_r.Q_rot, DSt.tibia_r.Q_rot] =...
+%     OpenIMUs_AngAlign_v3(DSt.adduction_range_r, DSt.femur_r.g_SS, DSt.tibia_r.g_SS, ...
+%     DSt.femur_r.R_GS, DSt.tibia_r.R_GS, fs, visualization);
+% 
+% %-----------   UPDATE GS orientation in the model with PCA+FAVRE
+% qLT = quaternion([0 0 angleLT], 'eulerd', 'XYZ', 'frame');% left tibia
+% qRT = quaternion([0 0 angleRT], 'eulerd', 'XYZ', 'frame');% right tibia
+% 
+% % RIGHT TIBIA Rotation
+% DSt.tibia_r.Q_GS2 = (qRT).*DSt.tibia_r.Q_GS; %all the entire movement
+% DSt.tibia_r.R_GS2 = quat2rotm(DSt.tibia_r.Q_GS2);
+% DSt.tibia_r.g_SS2 = angvel(DSt.tibia_r.Q_GS2, 1/fs, 'point');% get angular velocity LS    
+% % LEFT TIBIA Rotation
+% DSt.tibia_l.Q_GS2 = (qLT).* DSt.tibia_l.Q_GS; %all the entire movement
+% DSt.tibia_l.R_GS2 = quat2rotm(DSt.tibia_l.Q_GS2);
+% DSt.tibia_l.g_SS2 = angvel(DSt.tibia_l.Q_GS2, 1/fs, 'point');% get angular velocity LS
+% 
+% %LEFT CALCANEUS
+% disp('--------------------- calcn_l ---------------------')
+% [angleLC, DSt.tibia_l.Q_rot, DSt.calcn_l.Q_rot] = ...
+%     OpenIMUs_AngAlign_v3(DSt.adduction_range_l, DSt.tibia_l.g_SS2, DSt.calcn_l.g_SS, ...
+%     DSt.tibia_l.R_GS2, DSt.calcn_l.R_GS, fs, visualization);
+% %RIGHT CALCANEUS
+% disp('--------------------- calcn_r ---------------------')
+% [angleRC, DSt.tibia_r.Q_rot, DSt.calcn_r.Q_rot] = ...
+%     OpenIMUs_AngAlign_v3(DSt.adduction_range_r, DSt.tibia_r.g_SS2, DSt.calcn_r.g_SS,...
+%     DSt.tibia_r.R_GS2, DSt.calcn_r.R_GS, fs, visualization);
+%  
+% qLC = quaternion([0 0 angleLC], 'eulerd', 'XYZ', 'frame');% left toes
+% qRC = quaternion([0 0 angleRC], 'eulerd', 'XYZ', 'frame');% right toes
+% 
+% % RIGHT CALCN Rotation
+% DSt.calcn_r.Q_GS2 = (qRC).* DSt.calcn_r.Q_GS; %all the entire movement
+% DSt.calcn_r.R_GS2 = quat2rotm(DSt.calcn_r.Q_GS2);
+% DSt.calcn_r.g_SS2 = angvel(DSt.calcn_r.Q_GS2, 1/fs, 'point');% get angular velocity LS
+% % LEFT CALCN Rotation
+% DSt.calcn_l.Q_GS2 = (qLC).* DSt.calcn_l.Q_GS; %all the entire movement
+% DSt.calcn_l.R_GS2 = quat2rotm(DSt.calcn_l.Q_GS2);
+% DSt.calcn_l.g_SS2 = angvel(DSt.calcn_l.Q_GS2, 1/fs, 'point');% get angular velocity LS
+% 
+% %% Create Matrix   - Xsens (PCA + Favre)
+% 
+% DSt.Data_Matrix_cal = [compact(DSt.torso.Q_GS(fr_cal)), compact(DSt.pelvis.Q_GS(fr_cal)), ...
+%     compact(DSt.humerus_r.Q_GS(fr_cal)), compact(DSt.radius_r.Q_GS(fr_cal))...
+%     compact(DSt.humerus_l.Q_GS(fr_cal)), compact(DSt.radius_l.Q_GS(fr_cal))...
+%     compact(DSt.femur_r.Q_GS(fr_cal)), compact(DSt.tibia_r.Q_GS2(fr_cal)), compact(DSt.calcn_r.Q_GS2(fr_cal)),...
+%     compact(DSt.femur_l.Q_GS(fr_cal)), compact(DSt.tibia_l.Q_GS2(fr_cal)), compact(DSt.calcn_l.Q_GS2(fr_cal))];
+% 
+% DSt.Data_Matrix = [compact(DSt.torso.Q_GS(fr_mov)), compact(DSt.pelvis.Q_GS(fr_mov)),...
+%     compact(DSt.humerus_r.Q_GS(fr_mov)), compact(DSt.radius_r.Q_GS(fr_mov))...
+%     compact(DSt.humerus_l.Q_GS(fr_mov)), compact(DSt.radius_l.Q_GS(fr_mov))...
+%     compact(DSt.femur_r.Q_GS(fr_mov)), compact(DSt.tibia_r.Q_GS2(fr_mov)), compact(DSt.calcn_r.Q_GS2(fr_mov)),...
+%     compact(DSt.femur_l.Q_GS(fr_mov)), compact(DSt.tibia_l.Q_GS2(fr_mov)), compact(DSt.calcn_l.Q_GS2(fr_mov))];
+% 
+% 
+% %% Create .STO file
+% Create_IMU_Storage(fullfile(OutPath, [filename '_orientations_cal.sto']), 1, nbodies, 0, DSt.Data_Matrix_cal, Headers);
+% Create_IMU_Storage(fullfile(OutPath, [filename '_orientations_trial.sto']), nfr, nbodies, DSt.time, DSt.Data_Matrix, Headers);
+% pause(1)
+% %% IK 
+% clc
+% close all;
+% 
+% 
+% orientationsFileName_IK = [filename '_orientations_trial.sto'];
+% startTime = 0;
+% endTime = 100;
+% resultsDirectory = 'IKResults';
+% IK_xml = 'myIMUIK_Setup.xml';
+% OpenSense_folder = OutPath;
+% 
+% OpenSense_OrientationTracking_fx(modelFileName_IK, orientationsFileName_IK, ...
+%     startTime, endTime, resultsDirectory, visualizeTracking, IK_xml, OpenSense_folder)
+% end
+% toc
+% beep;
+
