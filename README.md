@@ -1,2 +1,2 @@
 # OpenIMUs
-Calibration method for using in OpenSim
+Funcional calibration method for using in OpenSim
