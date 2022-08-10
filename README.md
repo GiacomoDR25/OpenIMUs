@@ -37,6 +37,8 @@ You can choose which sensors you want to calibrate in you OpenSim model
 
 INPUT: OpenSim model with IMU attached to the relative body segments (any orietation/translation -> they will be corrected) - https://simtk-confluence.stanford.edu:8443/display/OpenSim/How+to+Use+the+IMU+Placer
 
+The workflow was tested on Hamner2010 model
+
 OUTPUT: model with IMU correctly oriented (calibrated)
 
 6) OpenIMUs_IK_Mx:
