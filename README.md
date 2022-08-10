@@ -1,8 +1,11 @@
 # OpenIMUs
 
-This work is related to the following paper:
+This workflow improves the IMU Placer calibration of OpenSense by adding dynamic movements to the calibration.
 
+This work is related to the following paper:
+Inertial Sensor-to-Segment Calibration for Accurate 3D Joint Angle Calculation for Use in OpenSim
 https://www.mdpi.com/1424-8220/22/9/3259
+
 
 Funcional calibration method for using from OpenSim 4.1 and MATLAB 2020a on
 
