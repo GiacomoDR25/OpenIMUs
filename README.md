@@ -28,7 +28,7 @@ standing_range = 1:100
 sit_range = 100:1500
 adduction_r_range = 1740:1920
 
-see the Data_Structure folder fpr the example.
+see the Data_Structure folder for the example.
 
 
 5) Calibration <-OpenIMUs_FC_Mx:
@@ -40,7 +40,7 @@ You can choose which sensors you want to calibrate in you OpenSim model
 
 INPUT: OpenSim model with IMU attached to the relative body segments (any orietation/translation -> they will be corrected) - https://simtk-confluence.stanford.edu:8443/display/OpenSim/How+to+Use+the+IMU+Placer
 
-The workflow was tested on Hamner2010 model
+The workflow was tested on Hamner2010 model modified with 3dof in the knee -> knee_adduction and knee_rotation
 
 OUTPUT: model with IMU correctly oriented (calibrated)
 
