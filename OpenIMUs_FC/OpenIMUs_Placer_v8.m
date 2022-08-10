@@ -92,25 +92,3 @@ if all_same == "true"
     DSt.calcn_l.g_SS = angvel(DSt.calcn_l.Q_GS, 1/fs, 'point');% get angular velocity LS
     
 end
-
-% viewer = HelperOrientationViewer;
-% for ii=adduction_range1l
-%     viewer(DS.femur_l.Q_align1(ii,:));
-%     pause(0.02);
-% end
-% qrot_tibia = quaternion([0, 0, 0],'eulerd','XYZ','frame');% Xsens-to-OpenSim
-% for ii=adduction_range1l
-%     viewer(qrot_tibia*DS.tibia_l.Q_align1(ii,:));
-%     pause(0.02);
-% end
-% 
-%     viewer = HelperOrientationViewer;
-%     for ii=adduction_range1l
-%         viewer(DS.femur_l.Q_align1(ii,:));
-%         pause(0.02);
-%     end
-%     qrot_tibia = quaternion([0, 0, 19],'eulerd','XYZ','frame');% Xsens-to-OpenSim
-%     for ii=adduction_range1l
-%         viewer(qrot_tibia*DS.tibia_l.Q_align1(ii,:));
-%         pause(0.02);
-%     end
