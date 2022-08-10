@@ -43,3 +43,6 @@ This tool use the standatd IMU_IK OpenSense https://simtk-confluence.stanford.ed
 
 INPUT: .sto file + calibrated model
 OUTPUT: ik.mot file
+
+For any further information contact:
+giacomo.diraimondo@kuleuven.be
