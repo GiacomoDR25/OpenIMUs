@@ -4,7 +4,7 @@ This work is related to the following paper:
 
 https://www.mdpi.com/1424-8220/22/9/3259
 
-Funcional calibration method for using in OpenSim 4.1 on
+Funcional calibration method for using from OpenSim 4.1 and MATLAB 2020a on
 
 Steps for the calibration:
 
