@@ -24,9 +24,9 @@ see the Data_Struct_S01.mat example.
 
 
 5) Calibration <-OpenIMUs_FC_Mx:
-		x=1: uses STS + abduction-adduction
-		x=2: uses STS + walking
-		x=3: uses STS + abduction-adduction + walking
+x=1: uses STS + abduction-adduction; 
+x=2: uses STS + walking;
+x=3: uses STS + abduction-adduction + walking;
     
 You can choose which sensors you want to calibrate in you OpenSim model
 
@@ -35,9 +35,9 @@ INPUT: OpenSim model with IMU attached to the relative body segments (any orieta
 OUTPUT: model with IMU correctly oriented (calibrated)
 
 6) OpenIMUs_IK_Mx:
-		x=1: uses STS + abduction-adduction
-		x=2: uses STS + walking
-		x=3: uses STS + abduction-adduction + walking
+x=1: uses STS + abduction-adduction; 
+x=2: uses STS + walking;
+x=3: uses STS + abduction-adduction + walking;
 
 This tool use the standatd IMU_IK OpenSense https://simtk-confluence.stanford.edu:8443/display/OpenSim/IMU+Inverse+Kinematics
 
