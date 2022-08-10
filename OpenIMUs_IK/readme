@@ -1,1 +1,6 @@
+M1 - M2 - M3 are the same functions. 
+The model input is different:
 
+1- model calibrated with STS + adbuction-adduciton
+2- model calibrated with STS + walking
+3- model calibrated with STS + adbuction/adduciton + walking
