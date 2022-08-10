@@ -1,6 +1,7 @@
 # OpenIMUs
 
-This work is related to the paper linked below:
+This work is related to the following paper:
+
 https://www.mdpi.com/1424-8220/22/9/3259
 
 Funcional calibration method for using in OpenSim 4.1 on
