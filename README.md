@@ -25,7 +25,7 @@ standing_range = 1:100
 sit_range = 100:1500
 adduction_r_range = 1740:1920
 
-see the Data_Struct_S01.mat example.
+see the Data_Struct folder fpr the example.
 
 
 5) Calibration <-OpenIMUs_FC_Mx:
