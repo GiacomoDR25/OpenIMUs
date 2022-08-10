@@ -1,5 +1,5 @@
 # OpenIMUs
-Funcional calibration method for using in OpenSim
+Funcional calibration method for using in OpenSim 4.1 on
 
 Steps for the calibration:
 
